@@ -89,7 +89,6 @@ loadFromLocalStorage();
 /* storeObjectToLocalStorage => Function to store object in Local storage in string format */
 function storeObjectToLocalStorage (key, value){
     let value_serialize =  JSON.stringify(value);
-    console.log(value_serialize);
     window.localStorage.setItem (key, value_serialize);
 }
 
@@ -97,7 +96,6 @@ function storeObjectToLocalStorage (key, value){
 /* readLocalStorageKeyConvertToObject => Function to read local storage key value pair in string format, convert into Object and return the object*/
 function readLocalStorageKeyConvertToObject (key){
     let value_deserialize =  JSON.parse(window.localStorage.getItem(key));
-    console.log(value_deserialize);
     return value_deserialize;
 }
 
@@ -109,17 +107,13 @@ function removeItemFromLocalStorage (key){
 //Function to retrieve and display Five Day weather forecast. 
 var getFiveDayWeatherForecast = function(name,country){
     var URL = baseURL + "forecast?q=" + name + "," + country + "&APPID=10287ea6d77bdc8b1ed99dbf5b15e8c7" + "&units=imperial";
-    console.log(URL);
     fetch(URL).then(function(response){
         if (response.ok){
             response.json().then(function(data){
-                console.log(data);
                 forecastArrayLength = 0;
                 forecastArrayLength = forecastArray.length;
                 var cnt = 0;
-                console.log(data.list.length);
                 for (var i=0; i < data.list.length; i=i+8){
-                    console.log("Inside For loop. Value of i=" + i );
                     forecastArray.push(forecast());
                     forecastArray[forecastArrayLength].date = data.list[i].dt_txt;
                     forecastArray[forecastArrayLength].temp = data.list[i].main.temp + "°F";
@@ -129,7 +123,6 @@ var getFiveDayWeatherForecast = function(name,country){
                     forecastArrayLength ++;
                     cnt++;
                 }
-                console.log(forecastArray);
                 populateForecast();
             });
         }
@@ -175,13 +168,10 @@ var fetchUVIndex = function(latt, long, classname){
     fetch (URL).then(function(response){
         if (response.ok){
             response.json().then(function(data){
-                console.log (" This is fetching UI Index");
-                console.log(data.value);
                 weather.UVIndex = "";
                 weather.UVIndex = data.value;
                 var eleID = document.querySelector(classname);
                 eleID.textContent = weather.UVIndex;
-                console.log ("Value of weather UVIndex in fetchUVIndex" + weather.UVIndex);
             });
         }   
     });
@@ -208,12 +198,10 @@ var populateCityWeatherReport = function() {
     divContainer.style.justifyContent = "left";
     divContainer.style.paddingLeft = "0%";
     cardbody.appendChild(divContainer);
-    console.log(weather);
     var dateTimeValue = "(" + moment().format('D/MM/YYYY') + ")";
     var value = weather.cityname + " " + dateTimeValue; 
     var name ="";
     var imageiconurl = "https://openweathermap.org/img/wn/" + weather.weatherIcon + ".png";// + "@2x.png";
-    console.log(imageiconurl);
     populateData(divContainer,"h3", "cardheader", "", value,imageiconurl, weather.description);
     name = "Temprature : ";
     value = weather.temp + "°F";
@@ -226,9 +214,7 @@ var populateCityWeatherReport = function() {
     populateData(divContainer,"p", "windspeed", name, value,"","");
     name = "UV Index : ";
     value = weather.UVIndex;
-    console.log ("value of weather.UVIndex" + weather.UVIndex);
     populateData(divContainer,"p", "uvindex", name, value,"","");
-    console.log(forecastArray);
     fetchUVIndex(weather.lattitude, weather.longitude, ".uvindex-value");
     forecastArray =[];
     forecastArrayLength=0;
@@ -249,7 +235,6 @@ var getWeatherReportByCity = function(event){
     var inputvalue = "";
     var query = "";
     if (event.target.className.includes("listitem")){
-        console.log("Value of text content in getWeatherReportByCity:" + event.target.textContent );
         inputvalue = event.target.textContent;
     } else {
         inputvalue = document.querySelector("input[name='cityname']").value;
@@ -272,7 +257,6 @@ var getWeatherReportByCity = function(event){
     }
 
     var URL = baseURL + "weather?q=" + query + "&APPID=10287ea6d77bdc8b1ed99dbf5b15e8c7" + "&units=imperial";
-    console.log("Value of City Name is:", URL);
     
 
     fetch(URL)
@@ -292,7 +276,6 @@ var getWeatherReportByCity = function(event){
                         storeObjectToLocalStorage("QueryList", cityNameArray);
                     }
                 }
-                console.log(data);
                 weather.temp = data.main.temp;
                 weather.humidity = data.main.humidity;
                 weather.cityname = data.name;
@@ -303,8 +286,6 @@ var getWeatherReportByCity = function(event){
                 weather.weatherIcon = data.weather[0].icon;
                 weather.lattitude = data.coord.lat;
                 weather.longitude = data.coord.lon;
-                
-                console.log ("Value of weather.UVIndex:" + weather.UVIndex);
                 populateCityWeatherReport(weather.cityname,weather.country);
                 getFiveDayWeatherForecast(weather.cityname,weather.country);
             });
@@ -343,7 +324,6 @@ var populateForecast = function() {
     divContainer.style.justifyContent = "space-evenly";
     divContainer1.appendChild(divContainer);
 
-    console.log("Inside Populate Forecast Function. Array Length is:" + forecastArray.length);
     for (var i=0; i < forecastArray.length; i++) {
         var cardmain = document.createElement("div");
         cardmain.className = "card text-white bg-primary";
