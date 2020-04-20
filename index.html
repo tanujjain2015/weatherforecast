@@ -3,9 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Forecast</title>
+    <!--script src="./assets/js/typeahead.bundle.js"></script-->
 </head>
 <body>
+    <header>
+        <h1 class="display-3 text-center bg-dark text-white">Weather Forecast</h1>
+        <p class="lead text-center">A simple weather forecast application for showing weather update</p>
+        <p id="currentDay" class="lead"></p>
+    </header>
+    <main>
+        <section class="main-container" style="display:flex;width: 100%;flex-wrap: wrap;">
+            <section class="sidebar" style="width: 20%;">
+                    <div class="card searchcitycard"  > 
+                        <div class="card-body">
+                            <h4 class="text-dark">Search for City</h4>
+                            <div style="display: flex; flex-wrap: wrap;">
+                                <input class="cityname" id="cityname" placeholder="Enter City Name" name="cityname" style="display: inline; width: 80%;"></input>
+                                <button type="button submitbtn" class="btn btn-primary" id="submitbtn"   style="display: inline;">Submit</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body">
+                            <h5 class="text-dark">Last 10 Search History: </h5>
+                            <div class="list-group">
+                                
+                            </div>
+                        </div>
+                </div>
+            </section>
+            <section style="width: 80%;"> 
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card main-card" id="main-card">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-deck forecast-deck" style="margin: 0;">
+                                
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
