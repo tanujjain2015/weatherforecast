@@ -3,7 +3,7 @@ var mainCardEle = document.querySelector(".main-card");
 var forecastDeskEle = document.querySelector(".forecast-deck");
 var submitButton = document.querySelector("#submitbtn");
 var listItem = document.querySelector(".list-group");
-var baseURL = "http://api.openweathermap.org/data/2.5/";
+var baseURL = "https://api.openweathermap.org/data/2.5/";
 var counter = 0;
 
 var API_KEY = "10287ea6d77bdc8b1ed99dbf5b15e8c7";
@@ -108,7 +108,7 @@ function removeItemFromLocalStorage (key){
 
 //Function to retrieve and display Five Day weather forecast. 
 var getFiveDayWeatherForecast = function(name,country){
-    var URL = "http://api.openweathermap.org/data/2.5/forecast?q=" + name + "," + country + "&APPID=10287ea6d77bdc8b1ed99dbf5b15e8c7" + "&units=imperial";
+    var URL = baseURL + "forecast?q=" + name + "," + country + "&APPID=10287ea6d77bdc8b1ed99dbf5b15e8c7" + "&units=imperial";
     console.log(URL);
     fetch(URL).then(function(response){
         if (response.ok){
@@ -212,7 +212,7 @@ var populateCityWeatherReport = function() {
     var dateTimeValue = "(" + moment().format('D/MM/YYYY') + ")";
     var value = weather.cityname + " " + dateTimeValue; 
     var name ="";
-    var imageiconurl = "http://openweathermap.org/img/wn/" + weather.weatherIcon + ".png";// + "@2x.png";
+    var imageiconurl = "https://openweathermap.org/img/wn/" + weather.weatherIcon + ".png";// + "@2x.png";
     console.log(imageiconurl);
     populateData(divContainer,"h3", "cardheader", "", value,imageiconurl, weather.description);
     name = "Temprature : ";
@@ -360,7 +360,7 @@ var populateForecast = function() {
         cardbody.appendChild(cardTitile);
 
         var cardImage = document.createElement("img");
-        var imageiconurl = "http://openweathermap.org/img/wn/" + forecastArray[i].weatherIcon + ".png";
+        var imageiconurl = "https://openweathermap.org/img/wn/" + forecastArray[i].weatherIcon + ".png";
         cardImage.setAttribute("src",imageiconurl);
         cardImage.setAttribute("alt", forecastArray[i].weatherdescription);
         cardImage.style.alignContent = "center";
